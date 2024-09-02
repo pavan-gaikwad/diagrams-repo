@@ -34,12 +34,11 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: 'us-east-1'  # Change this to your desired region
-        S3_LOCATION: ${{ secrets.S3_LOCATION }}
       run: |
         for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
           echo "Processing $file"
           output_file="${file%.*}.svg"
           d2 --theme=300 --dark-theme=200 -l elk --pad 0 "$file" "$output_file"
-          aws s3 cp "$output_file" $S3_LOCATION
+          aws s3 cp "$output_file" "s3://substack-demo-diagrams"
         done
 
