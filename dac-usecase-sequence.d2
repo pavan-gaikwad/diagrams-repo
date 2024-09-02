@@ -1,0 +1,28 @@
+shape: sequence_diagram
+user: User
+llm: LLM
+laptop: Local Laptop
+git: Git Repository
+pipeline: Build Pipeline
+s3: S3 Bucket
+
+user -> llm: 1. Provides prompt
+llm -> user: 2. Creates diagram code
+user -> laptop: 3. Compiles code and iterates
+user -> git: 4. Checks in satisfied code
+git -> pipeline: 5. Triggers on commit
+pipeline -> s3: 5. Builds and uploads diagram
+s3 -> user: 6. Copies URL to share
+
+style: {
+  stroke: "#333333"
+  fill: "#f5f5f5"
+  font-size: 14
+}
+
+user.style.fill: "#e1f5fe"
+llm.style.fill: "#fff9c4"
+laptop.style.fill: "#e8f5e9"
+git.style.fill: "#fce4ec"
+pipeline.style.fill: "#fff3e0"
+s3.style.fill: "#e8eaf6"
